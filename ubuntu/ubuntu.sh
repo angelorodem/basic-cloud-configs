@@ -48,13 +48,13 @@ systemctl start ossec
 
 
 # OPTIONAL
-read -p "Install Cloudwatch agent [y/N]? " -n 1 -r
+read -p "Install Cloudwatch agent [y/N]? " -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo "Installing agent"
     
-    read -p "Install for ARM agent [y/N]? " -n 1 -r
+    read -p "Install for ARM agent [y/N]? " -r
     echo    # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
