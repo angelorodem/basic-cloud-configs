@@ -51,7 +51,7 @@ service status ossec
 # OPTIONAL
 read -p "Install Cloudwatch agent [y/N]? " -n 1 -r
 echo    # (optional) move to a new line
-if [[ ! $REPLY =~ ^[Yy]$ ]]
+if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo "Installing agent"
     wget https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb
@@ -64,7 +64,7 @@ fi
 
 read -p "Use Bad ip blocker? [y/N]? " -n 1 -r
 echo    # (optional) move to a new line
-if [[ ! $REPLY =~ ^[Yy]$ ]]
+if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo "Installing bad ip blocker"
     apt-get install python3 python3-pip
