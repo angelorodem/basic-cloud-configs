@@ -34,7 +34,7 @@ service enable fail2ban
 service start fail2ban
 
 
-OSSEC_VERSION = "3.6.0"
+OSSEC_VERSION="3.6.0"
 echo "Installing OSSEC $OSSEC_VERSION"
 #Deps
 apt-get install gcc make libevent-dev zlib1g-dev libssl-dev libpcre2-dev wget tar build-essential -y
@@ -53,6 +53,7 @@ read -p "Install Cloudwatch agent [y/N]? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
+    echo "Installing agent"
     wget https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb
     dpkg -i -E ./amazon-cloudwatch-agent.deb
     cp ../generic/cloudwatch_config.json /opt/aws/amazon-cloudwatch-agent/bin/config.json
@@ -65,8 +66,9 @@ read -p "Use Bad ip blocker? [y/N]? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
+    echo "Installing bad ip blocker"
     apt-get install python3 python3-pip
-    pip3 install requests -y
+    yes | pip3 install requests
     cp ../generic/badblocker.py /root/badblocker.py
     (crontab -l 2>/dev/null; echo "*/20 * * * * python3 /root/badblocker.py") | crontab -    
 fi
