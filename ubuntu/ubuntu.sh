@@ -44,7 +44,6 @@ tar xzf $OSSEC_VERSION.tar.gz
 rm -rf $OSSEC_VERSION.tar.gz ossec-hids-*/
 systemctl enable ossec
 systemctl start ossec
-service status ossec
 #sudo systemctl enable ossec
 
 
