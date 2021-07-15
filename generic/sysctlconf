@@ -11,3 +11,6 @@ net.ipv4.conf.all.accept_source_route=0
 # Ignoring broadcasts request
 net.ipv4.icmp_echo_ignore_broadcasts=1
 net.ipv4.icmp_ignore_bogus_error_messages=1
+
+#Reduce priority of swap
+vm.swappiness = 0
