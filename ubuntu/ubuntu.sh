@@ -75,7 +75,7 @@ echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo "Installing bad ip blocker"
-    apt-get install python3 python3-pip
+    apt-get install python3 python3-pip -y
     yes | pip3 install requests
     cp ../generic/badblocker.py /root/badblocker.py
     (crontab -l 2>/dev/null; echo "*/20 * * * * python3 /root/badblocker.py") | crontab -    
