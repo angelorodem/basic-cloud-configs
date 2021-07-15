@@ -13,7 +13,8 @@ swapon /swapfile
 echo '/swapfile none swap defaults 0 0' >> /etc/fstab
 swapon --show
 echo 0 | sudo tee /proc/sys/vm/swappiness
-echo vm.swappiness = 0 | sudo tee -a /etc/sysctl.conf
+
+cat ../generic/sysctlconf >> /etc/sysctl.conf
 
 
 # automatic reboot at night
