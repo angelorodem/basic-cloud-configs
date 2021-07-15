@@ -1,0 +1,38 @@
+[DEFAULT]
+bantime = 15000
+banaction = iptables-allports
+bantime.rndtime = 6000
+bantime.increment = true
+maxretry = 5
+maxmatches = %(maxretry)s
+banaction_allports = iptables-allports
+action = %(action_)s
+ignoreself = true
+
+[sshd]
+enabled = true
+port = 22
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+
+[nginx-botsearch]
+enabled = true
+port     = http,https
+logpath  = %(nginx_error_log)s
+maxretry = 2
+
+[nginx-http-auth]
+enabled = true
+port    = http,https
+logpath = %(nginx_error_log)s
+
+[nginx-limit-req]
+enabled = true
+port    = http,https
+logpath = %(nginx_error_log)s
+
+[php-url-fopen]
+enabled = true
+port    = http,https
+logpath = %(nginx_access_log)s
