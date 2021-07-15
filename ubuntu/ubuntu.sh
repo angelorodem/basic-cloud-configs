@@ -42,8 +42,8 @@ wget https://github.com/ossec/ossec-hids/archive/$OSSEC_VERSION.tar.gz
 tar xzf $OSSEC_VERSION.tar.gz
 ./ossec-hids-*/install.sh
 rm -rf $OSSEC_VERSION.tar.gz ossec-hids-*/
-service enable ossec
-service start ossec
+systemctl enable ossec
+systemctl start ossec
 service status ossec
 #sudo systemctl enable ossec
 
