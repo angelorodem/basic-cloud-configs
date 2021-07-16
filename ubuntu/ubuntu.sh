@@ -55,7 +55,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo "Installing agent"
     
-    read -p "Install for ARM agent [y/N]? " -r
+    read -p "Install for ARM Arch [y/N]? " -r
     echo    # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
