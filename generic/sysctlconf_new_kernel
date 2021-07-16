@@ -1,0 +1,6 @@
+
+# Available only on kernel 4.9 up
+
+#The BBR congestion control algorithm can help achieve higher bandwidths and lower latencies for internet traffic. 
+net.core.default_qdisc = fq
+net.ipv4.tcp_congestion_control = bbr

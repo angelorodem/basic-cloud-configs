@@ -3,17 +3,18 @@
 echo "This script will configure a Ubuntu 20 instance"
 
 # Add 1g swap
-echo "Adding 1g Swap"
+echo "Adding SWAP"
 fallocate -l 1G /swapfile
 dd if=/dev/zero of=/swapfile bs=1024 count=1048576
 chown root:root /swapfile
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
+
 echo '/swapfile none swap defaults 0 0' >> /etc/fstab
-swapon --show
 echo 0 | sudo tee /proc/sys/vm/swappiness
 
+#Add sysctl configs
 cat ../generic/sysctlconf >> /etc/sysctl.conf
 
 
@@ -45,7 +46,6 @@ tar xzf $OSSEC_VERSION.tar.gz
 rm -rf $OSSEC_VERSION.tar.gz ossec-hids-*/
 systemctl enable ossec
 systemctl start ossec
-#sudo systemctl enable ossec
 
 
 # OPTIONAL
@@ -71,7 +71,7 @@ fi
 
 
 
-read -p "Use Bad ip blocker? [y/N]? " -n 1 -r
+read -p "Use Bad ip blocker? [y/N]? " -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
@@ -80,6 +80,23 @@ then
     yes | pip3 install requests
     cp ../generic/badblocker.py /root/badblocker.py
     (crontab -l 2>/dev/null; echo "*/20 * * * * python3 /root/badblocker.py") | crontab -    
+fi
+
+kernelv=$(uname -r)
+
+read -p "is Kernel $kernelv, higher than 4.9? use BBR? [y/N]? " -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cat ../generic/sysctlconf_new_kernel >> /etc/sysctl.conf
+fi
+
+read -p "Reboot? [y/N]? " -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo "Till later."
+    reboot now
 fi
 
 
